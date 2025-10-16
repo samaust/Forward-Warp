@@ -2,7 +2,7 @@ import torch
 from torch.nn import Module
 from torch.autograd import Function
 
-import forward_warp_cuda
+from forward_warp_cuda import forward_warp_cuda
 
 
 class Forward_warp_max_motion_function(Function):

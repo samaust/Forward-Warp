@@ -2,7 +2,7 @@ import torch
 from torch.nn import Module
 from torch.autograd import Function
 
-import forward_warp_cuda
+from forward_warp_cuda import forward_warp_cuda
 from forward_warp.forward_warp_python import Forward_Warp_Python
 
 
