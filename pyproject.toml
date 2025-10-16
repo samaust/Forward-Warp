@@ -12,7 +12,7 @@ dependencies = [
 ]
 
 [tool.setuptools]
-packages = ["forward_warp_cuda", "forward_warp"]
+packages = ["forward_warp"]
 
 [project.urls]
 Repository = "https://github.com/samaust/Forward-Warp"

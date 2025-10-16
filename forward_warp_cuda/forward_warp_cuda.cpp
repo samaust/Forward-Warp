@@ -1,4 +1,4 @@
-#include <torch/torch.h>
+#include <torch/extension.h>
 #include <vector>
 
 #include "forward_warp.h"
@@ -59,9 +59,7 @@ at::Tensor forward_warp_max_motion_forward(
   return forward_warp_max_motion_cuda_forward(im0, flow, im1, d_buffer, wght_buffer);
 }
 
-PYBIND11_MODULE(
-    TORCH_EXTENSION_NAME, 
-    m){
+PYBIND11_MODULE(TORCH_EXTENSION_NAME, m){
   m.def("forward", &forward_warp_forward, "forward warp forward (CUDA)");
   m.def("backward", &forward_warp_backward, "forward warp backward (CUDA)");
   m.def("forward_max_motion", &forward_warp_max_motion_forward, "forward warp max motion forward (CUDA)");

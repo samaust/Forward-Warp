@@ -2,8 +2,8 @@ from setuptools import setup
 from torch.utils.cpp_extension import BuildExtension, CUDAExtension
 
 setup(
-    name='forward_warp_cuda',
-    packages=["forward_warp", "forward_warp_cuda"],
+    name='forward_warp',
+    packages=["forward_warp"],
     ext_modules=[
         CUDAExtension(
             name='forward_warp_cuda.forward_warp_cuda',
