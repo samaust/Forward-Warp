@@ -6,8 +6,7 @@ Has been tested in pytorch=0.4.0, python=3.6, CUDA=9.0
 
 ```bash
 export CUDA_HOME=/usr/local/cuda #use your CUDA instead
-chmod a+x install.sh
-./install.sh
+pip install forward_warp@git+https://github.com/samaust/Forward-Warp@python_package
 ```
 
 ### Test
@@ -20,7 +19,7 @@ python test.py
 ### Usage
 
 ```python
-from Forward_Warp import forward_warp
+from forward_warp import forward_warp
 
 fw = forward_warp()
 # default interpolation mode is Bilinear

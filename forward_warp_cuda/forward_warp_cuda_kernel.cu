@@ -264,7 +264,7 @@ at::Tensor forward_warp_max_motion_cuda_forward(
   const int H = im0.size(2);
   const int W = im0.size(3);
   const int total_step = B * H * W;
-  AT_DISPATCH_FLOATING_TYPES(im0.type(), "forward_warp_forward_cuda", ([&] {
+  AT_DISPATCH_FLOATING_TYPES(im0.scalar_type(), "forward_warp_forward_cuda", ([&] {
     forward_warp_max_motion_cuda_forward_kernel<scalar_t>
     <<<GET_BLOCKS(total_step), CUDA_NUM_THREADS>>>(
       total_step,
@@ -289,7 +289,7 @@ at::Tensor forward_warp_cuda_forward(
   const int H = im0.size(2);
   const int W = im0.size(3);
   const int total_step = B * H * W;
-  AT_DISPATCH_FLOATING_TYPES(im0.type(), "forward_warp_forward_cuda", ([&] {
+  AT_DISPATCH_FLOATING_TYPES(im0.scalar_type(), "forward_warp_forward_cuda", ([&] {
     forward_warp_cuda_forward_kernel<scalar_t>
     <<<GET_BLOCKS(total_step), CUDA_NUM_THREADS>>>(
       total_step,
@@ -316,7 +316,7 @@ std::vector<at::Tensor> forward_warp_cuda_backward(
   const int W = im0.size(3);
   const int total_step = B * H * W;
 
-  AT_DISPATCH_FLOATING_TYPES(grad_output.type(), "forward_warp_backward_cuda", ([&] {
+  AT_DISPATCH_FLOATING_TYPES(grad_output.scalar_type(), "forward_warp_backward_cuda", ([&] {
     forward_warp_cuda_backward_kernel<scalar_t>
     <<<GET_BLOCKS(total_step), CUDA_NUM_THREADS>>>(
       total_step,

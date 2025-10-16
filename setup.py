@@ -1,9 +1,19 @@
-from setuptools import setup, find_packages
- 
+from setuptools import setup
+from torch.utils.cpp_extension import BuildExtension, CUDAExtension
+
 setup(
-    name='Forward_Warp',
-    version='0.0.1',
-    packages=find_packages(),
-    author = "wbhu",
-    author_email = "huwenbodut@gmail.com",
+    name='forward_warp_cuda',
+    packages=["forward_warp", "forward_warp_cuda"],
+    ext_modules=[
+        CUDAExtension(
+            name='forward_warp_cuda.forward_warp_cuda',
+            sources=[
+                'forward_warp_cuda/forward_warp_cuda.cpp',
+                'forward_warp_cuda/forward_warp_cuda_kernel.cu',
+            ],
+        ),
+    ],
+    cmdclass={
+        'build_ext': BuildExtension.with_options(use_ninja=False),
+    },
 )

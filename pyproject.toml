@@ -1,0 +1,18 @@
+[build-system]
+requires = ["numpy", "setuptools>=61", "setuptools-scm[simple]>=8", "torch", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "forward_warp"
+description = "An optical flow forward warp's lib with backpropagation using pytorch."
+dynamic = ["version"]
+license = "MIT"
+dependencies = [
+    "torch",
+]
+
+[tool.setuptools]
+packages = ["forward_warp_cuda", "forward_warp"]
+
+[project.urls]
+Repository = "https://github.com/samaust/Forward-Warp"
