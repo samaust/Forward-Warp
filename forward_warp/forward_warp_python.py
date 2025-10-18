@@ -1,7 +1,7 @@
 import torch
 
 
-class Forward_Warp_Python:
+class Forward_warp_python:
     @staticmethod
     def forward(im0, flow, interpolation_mode):
         im1 = torch.zeros_like(im0)

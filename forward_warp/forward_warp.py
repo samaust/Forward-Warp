@@ -3,7 +3,7 @@ from torch.nn import Module
 from torch.autograd import Function
 
 from forward_warp_cuda import forward_warp_cuda
-from forward_warp import Forward_Warp_Python
+from .forward_warp_python import Forward_warp_python
 
 
 class Forward_warp_function(Function):
@@ -30,7 +30,7 @@ class Forward_warp_function(Function):
         if im0.is_cuda:
             im1 = forward_warp_cuda.forward(im0, flow, interpolation_mode)
         else:
-            im1 = Forward_Warp_Python.forward(im0, flow, interpolation_mode)
+            im1 = Forward_warp_python.forward(im0, flow, interpolation_mode)
 
         return im1
 
@@ -42,7 +42,7 @@ class Forward_warp_function(Function):
             im0_grad, flow_grad = forward_warp_cuda.backward(
                 grad_output, im0, flow, interpolation_mode)
         else:
-            im0_grad, flow_grad = Forward_Warp_Python.backward(
+            im0_grad, flow_grad = Forward_warp_python.backward(
                 grad_output, im0, flow, interpolation_mode)
         return im0_grad, flow_grad, None
 

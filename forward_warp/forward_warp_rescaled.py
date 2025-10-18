@@ -1,7 +1,7 @@
 import torch
 from torch.nn import Module
 
-from forward_warp import Forward_warp
+from .forward_warp import Forward_warp
 
 
 class Forward_warp_rescaled(Module):
