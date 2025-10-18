@@ -2,14 +2,14 @@ import torch
 
 
 def test_forward_warp_max_motion_forward():
-    from Forward_Warp import forward_warp_max_motion
+    from forward_warp import Forward_warp_max_motion
 
     B, H, W = 2, 5, 10
 
     img = torch.ones(B, 3, H, W).cuda()
     flow = torch.zeros(B, H, W, 2).cuda()
 
-    fw = forward_warp_max_motion()
+    fw = Forward_warp_max_motion()
 
     warped, disocclusions, im1_buffer, d_buffer, wght_buffer = fw(img, flow, debug=True)
 
@@ -62,7 +62,7 @@ def test_forward_warp_max_motion_forward():
 
 
 def test_forward_warp_max_motion_arange():
-    from Forward_Warp import forward_warp_max_motion
+    from forward_warp import Forward_warp_max_motion
 
     B, H, W = 1, 1, 6
 
@@ -70,7 +70,7 @@ def test_forward_warp_max_motion_arange():
     flow = torch.zeros(B, H, W, 2).cuda()
     flow[0,0,:,0] = torch.arange(W)
 
-    fw = forward_warp_max_motion()
+    fw = Forward_warp_max_motion()
 
     warped, disocclusions, im1_buffer, d_buffer, wght_buffer = fw(img, flow, debug=True)
 
@@ -84,7 +84,7 @@ def test_forward_warp_max_motion_arange():
 
 
 def test_forward_warp_max_motion_occlusions():
-    from Forward_Warp import forward_warp_max_motion
+    from forward_warp import Forward_warp_max_motion
 
     B, H, W = 1, 1, 6
 
@@ -92,7 +92,7 @@ def test_forward_warp_max_motion_occlusions():
     flow = torch.zeros(B, H, W, 2).cuda()
     flow[0,0,:,0] = torch.tensor([1, 0, 1, 1, 2, 0])
 
-    fw = forward_warp_max_motion()
+    fw = Forward_warp_max_motion()
 
     warped, disocclusions, im1_buffer, d_buffer, wght_buffer = fw(img, flow, debug=True)
 
@@ -104,7 +104,7 @@ def test_forward_warp_max_motion_occlusions():
 
 
 def test_forward_warp_max_motion_multiple_occlusions():
-    from Forward_Warp import forward_warp_max_motion
+    from forward_warp import Forward_warp_max_motion
 
     B, H, W = 1, 1, 4
 
@@ -112,7 +112,7 @@ def test_forward_warp_max_motion_multiple_occlusions():
     flow = torch.zeros(B, H, W, 2).cuda()
     flow[0,0,:,0] = torch.tensor([0, 2, 1, 0])
 
-    fw = forward_warp_max_motion()
+    fw = Forward_warp_max_motion()
 
     warped, disocclusions, im1_buffer, d_buffer, wght_buffer = fw(img, flow, debug=True)
 
@@ -126,7 +126,7 @@ def test_forward_warp_max_motion_multiple_occlusions():
 
 
 def test_forward_warp_max_motion_expansion():
-    from Forward_Warp import forward_warp_max_motion
+    from forward_warp import Forward_warp_max_motion
 
     B, H, W = 1, 1, 16
 
@@ -134,7 +134,7 @@ def test_forward_warp_max_motion_expansion():
     flow = torch.zeros(B, H, W, 2).cuda()
     flow[0,0,:,0] = torch.arange(W) * 0.5
 
-    fw = forward_warp_max_motion()
+    fw = Forward_warp_max_motion()
 
     warped, disocclusions, im1_buffer, d_buffer, wght_buffer = fw(img, flow, debug=True)
 

@@ -4,7 +4,7 @@ import torch
 import pickle
 import numpy as np
 
-from Forward_Warp import forward_warp, forward_warp_rescaled
+from forward_warp import Forward_warp, Forward_warp_rescaled
 
 
 def get_mask(img, flow):
@@ -58,8 +58,8 @@ if __name__ == "__main__":
     im1 = torch.tensor(im1, dtype=torch.float32, requires_grad=True).permute(0, 3, 1, 2)
     flow = torch.tensor(flow, dtype=torch.float32, requires_grad=True)
 
-    fw = forward_warp()
-    fw_rescaled = forward_warp_rescaled()
+    fw = Forward_warp()
+    fw_rescaled = Forward_warp_rescaled()
 
     # since = time.time()
     # im1_python = fw(im0, flow)
@@ -72,13 +72,13 @@ if __name__ == "__main__":
     im1_cuda = fw(im0, flow)
     torch.cuda.synchronize()
     print("cuda version forward cost time: {}".format(time.time()-since))
-    
+
     torch.cuda.synchronize()
     since = time.time()
     im1_cuda_rescaled = fw_rescaled(im0, flow)
     torch.cuda.synchronize()
     print("cuda rescaled version forward cost time: {}".format(time.time()-since))
-    
+
     loss_fn = torch.nn.MSELoss()
     # python_loss = loss_fn(im1_python, im1)
     # print("python loss: {}".format(python_loss))
@@ -93,7 +93,7 @@ if __name__ == "__main__":
     # log_image(im1_python, "im1_python")
     log_image(im1_cuda, "im1_cuda")
     log_image(im1_cuda_rescaled, "im1_cuda_rescaled")
-    
+
     mask_cuda = get_mask(im0, flow)
     for margin in [0.5, 0.1, 0.01, 0.001]:
         mask_colored = get_color_mask(mask_cuda, margin=margin)

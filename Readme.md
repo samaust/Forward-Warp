@@ -1,6 +1,6 @@
 ## Foward Warp Pytorch Version
 
-Has been tested in pytorch=0.4.0, python=3.6, CUDA=9.0
+Has been tested in torch=2.8.0+cu126, python=3.12, CUDA=12.6
 
 ### Install
 
@@ -19,9 +19,9 @@ python test.py
 ### Usage
 
 ```python
-from forward_warp import forward_warp
+from forward_warp import Forward_warp
 
-fw = forward_warp()
+fw = Forward_warp()
 # default interpolation mode is Bilinear
 im2_bilinear = fw(im0, flow) 
 # use interpolation mode Nearest

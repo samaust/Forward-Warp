@@ -3,7 +3,7 @@ from torch.nn import Module
 from torch.autograd import Function
 
 from forward_warp_cuda import forward_warp_cuda
-from forward_warp.forward_warp_python import Forward_Warp_Python
+from forward_warp import Forward_Warp_Python
 
 
 class Forward_warp_function(Function):
