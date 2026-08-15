@@ -268,11 +268,11 @@ at::Tensor forward_warp_max_motion_cuda_forward(
     forward_warp_max_motion_cuda_forward_kernel<scalar_t>
     <<<GET_BLOCKS(total_step), CUDA_NUM_THREADS>>>(
       total_step,
-      im0.data<scalar_t>(),
-      flow.data<scalar_t>(),
-      im1.data<scalar_t>(),
-      d_buffer.data<int>(),
-      wght_buffer.data<scalar_t>(),
+      im0.data_ptr<scalar_t>(),
+      flow.data_ptr<scalar_t>(),
+      im1.data_ptr<scalar_t>(),
+      d_buffer.data_ptr<int>(),
+      wght_buffer.data_ptr<scalar_t>(),
       B, C, H, W);
   }));
 
@@ -293,9 +293,9 @@ at::Tensor forward_warp_cuda_forward(
     forward_warp_cuda_forward_kernel<scalar_t>
     <<<GET_BLOCKS(total_step), CUDA_NUM_THREADS>>>(
       total_step,
-      im0.data<scalar_t>(),
-      flow.data<scalar_t>(),
-      im1.data<scalar_t>(),
+      im0.data_ptr<scalar_t>(),
+      flow.data_ptr<scalar_t>(),
+      im1.data_ptr<scalar_t>(),
       B, C, H, W,
       interpolation_mode);
   }));
@@ -320,11 +320,11 @@ std::vector<at::Tensor> forward_warp_cuda_backward(
     forward_warp_cuda_backward_kernel<scalar_t>
     <<<GET_BLOCKS(total_step), CUDA_NUM_THREADS>>>(
       total_step,
-      grad_output.data<scalar_t>(),
-      im0.data<scalar_t>(),
-      flow.data<scalar_t>(),
-      im0_grad.data<scalar_t>(),
-      flow_grad.data<scalar_t>(),
+      grad_output.data_ptr<scalar_t>(),
+      im0.data_ptr<scalar_t>(),
+      flow.data_ptr<scalar_t>(),
+      im0_grad.data_ptr<scalar_t>(),
+      flow_grad.data_ptr<scalar_t>(),
       B, C, H, W,
       interpolation_mode);
   }));

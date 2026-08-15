@@ -16,15 +16,15 @@ class Forward_warp_max_motion_function(Function):
         assert im0.shape[0] == flow.shape[0]
         assert im0.shape[-2:] == flow.shape[1:3]
         assert flow.shape[3] == 2
-        assert im0.is_contiguous()
-        assert flow.is_contiguous()
+        im0 = im0.contiguous()
+        flow = flow.contiguous()
         assert torch.isnan(flow).long().sum() == 0
         assert torch.isinf(flow).long().sum() == 0
 
         B, C, H, W = im0.shape
         im1_buffer = torch.zeros_like(im0)
         d_buffer = torch.zeros(B, 1, H, W, dtype=torch.int32, device=im0.device)
-        wght_buffer = torch.zeros(B, 1, H, W, device=im0.device)
+        wght_buffer = torch.zeros(B, 1, H, W, dtype=im0.dtype, device=im0.device)
 
         ctx.save_for_backward(im0, flow)
         if im0.is_cuda:
@@ -41,7 +41,7 @@ class Forward_warp_max_motion_function(Function):
         im1 = im1_buffer / wght_buffer.clamp(min=eps)
 
         # disocclusion
-        disocclusions = torch.zeros(B, 1, H, W, device=im0.device)
+        disocclusions = torch.zeros(B, 1, H, W, dtype=im0.dtype, device=im0.device)
         disocclusions[wght_buffer == 0] = 1
 
         return im1, disocclusions, im1_buffer, d_buffer, wght_buffer
