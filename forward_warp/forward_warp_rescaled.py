@@ -6,6 +6,7 @@ from .forward_warp import Forward_warp
 
 class Forward_warp_rescaled(Module):
     """fowrard warp where input image and warped image are in same value range"""
+
     def __init__(self, eps=1e-6):
         super().__init__()
         self.forward_warp = Forward_warp(interpolation_mode="Bilinear")
